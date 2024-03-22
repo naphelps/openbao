@@ -93,6 +93,7 @@ nfpms:
 
 checksum:
   disable: true
+  # split: false
 
 snapcrafts:
   - name: openbao
@@ -323,8 +324,9 @@ changelog:
 #     - "--yes" # needed on cosign 2.0.0+
 
 release:
-  github: openbao
-  name: openbao
+  github:
+    owner: openbao
+    name: openbao
   draft: ${{ .Env.GITHUB_RELEASE_DRAFT }}
   replace_existing_draft: true
   prerelease: ${{ .Env.GITHUB_PRERELEASE }}
