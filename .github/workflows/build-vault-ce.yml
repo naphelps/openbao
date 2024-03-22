@@ -68,7 +68,7 @@ jobs:
         env:
           BUNDLE_PATH: out/${{ env.ARTIFACT_BASENAME }}.zip
         run: make ci-bundle
-      - uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
+      - uses: actions/upload-artifact@4
         with:
           name: ${{ env.ARTIFACT_BASENAME }}.zip
           path: out/${{ env.ARTIFACT_BASENAME }}.zip
