@@ -93,7 +93,6 @@ nfpms:
 
 checksum:
   disable: true
-  split: false
 
 snapcrafts:
   - name: openbao
