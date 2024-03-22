@@ -1,0 +1,335 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+
+# The lines below are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/need to use them.
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+project_name: bao
+
+version: 2
+
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
+    # you may remove this if you don't need go generate
+    - go generate ./...
+    - make protobuf
+
+builds:
+  - flags:
+      - -s -w
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - freebsd
+      - illumos
+      - linux
+      - openbsd
+      - solaris
+      - windows
+    goarch:
+      - amd64
+      - arm
+      - arm64
+      - riscv64
+    ignore:
+      - goos: solaris
+        goarch: arm
+      - goos: windows
+        goarch: arm
+    gobinary: go1.22.1
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+nfpms:
+  - vendor: OpenBao
+    homepage: https://github.com/openbao/openbao
+    maintainer: OpenBao
+    description: |
+      OpenBao exists to provide a software solution to manage, store, and distribute 
+      sensitive data including secrets, certificates, and keys.
+    license: MPL-2.0
+    formats:
+      # - apk
+      - deb
+      - rpm
+      - archlinux
+    dependencies:
+      - openssl
+    bindir: /usr/bin
+    section: default
+    contents:
+      - src: ./LICENSE
+        dst: /usr/share/doc/openbao/copyright
+        file_info:
+          mode: 0444
+      - src: ./.release/linux/package/etc
+        dst: /etc
+        type: config
+      - src: ./.release/linux/package/usr
+        dst: /usr
+        type: config
+    scripts:
+      preinstall: ".release/linux/preinst"
+      postinstall: ".release/linux/postinst"
+      postremove: ".release/linux/postrm"
+    overrides:
+      deb:
+       dependencies:
+         - openssl
+      rpm:
+        dependencies:
+          - openssl
+      archlinux:
+        dependencies:
+          - openssl
+#    deb:
+#      signature:
+#        key_file: "{{ .Env.GPG_KEY_PATH }}"
+#    rpm:
+#      signature:
+#        key_file: "{{ .Env.GPG_KEY_PATH }}"
+
+checksum:
+  disable: true
+  split: false
+
+snapcrafts:
+  - name: openbao
+    title: OpenBao
+    publish: false
+    summary: OpenBao is an open governance secrets management platform.
+    description: |
+      OpenBao exists to provide a software solution to manage, store, and distribute 
+      sensitive data including secrets, certificates, and keys.
+    grade: devel
+    license: MPL-2.0
+    # Use the latest LTS version
+    base: core22
+    extra_files:
+      - source: ./LICENSE
+        destination: LICENSE.txt
+        mode: 0444
+    apps:
+      bao:
+        command: bao
+        aliases:
+          - bao
+
+dockers:
+  - id: linux-amd64
+    use: buildx
+    goarch: amd64
+    skip_push: true
+    build_flag_templates:
+      - "--pull"
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.vendor=OpenBao"
+      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+    image_templates:
+      - "ghcr.io/openbao/openbao:{{ .Version }}-amd64"
+  - id: linux-arm
+    use: buildx
+    goarch: arm
+    build_flag_templates:
+      - "--pull"
+      - "--platform=linux/arm"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.vendor=OpenBao"
+      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+    image_templates:
+      - "ghcr.io/openbao/openbao:{{ .Version }}-arm"
+  - id: linux-arm64
+    use: buildx
+    goarch: arm64
+    build_flag_templates:
+      - "--pull"
+      - "--platform=linux/arm64"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.vendor=OpenBao"
+      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+    image_templates:
+      - "ghcr.io/openbao/openbao:{{ .Version }}-arm64"
+  - id: linux-riscv64
+    use: buildx
+    goarch: riscv64
+    build_flag_templates:
+      - "--pull"
+      - "--platform=linux/riscv64"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.vendor=OpenBao"
+      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+    image_templates:
+      - "ghcr.io/openbao/openbao:{{ .Version }}-riscv64"
+  - id: ubi9-amd64
+    use: buildx
+    goarch: amd64
+    skip_push: true
+    build_flag_templates:
+      - "--pull"
+      - "--build-context=ubi9-minimal=registry.access.redhat.com/ubi9-minimal:latest"
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.vendor=OpenBao"
+      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+    image_templates:
+      - "ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9"
+  - id: ubi9-arm64
+    use: buildx
+    goarch: arm64
+    build_flag_templates:
+      - "--pull"
+      - "--build-context=ubi9-minimal=registry.access.redhat.com/ubi9-minimal:latest"
+      - "--platform=linux/arm64"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.vendor=OpenBao"
+      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+    image_templates:
+      - "ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9"
+
+docker_manifests:
+  - name_template: ghcr.io/openbao/openbao:{{ .Version }}
+    image_templates:
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
+  - name_template: ghcr.io/openbao/openbao:{{ .Major }}.{{ .Minor }}
+    image_templates:
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
+  - name_template: ghcr.io/openbao/openbao:{{ .Major }}
+    image_templates:
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
+  - name_template: ghcr.io/openbao/openbao:latest
+    image_templates:
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64
+      - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64
+      - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
+      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
+
+archives:
+  - format: tar.gz
+    # this name template makes the OS and Arch compatible with the results of `uname`.
+    name_template: >-
+      {{ .ProjectName }}_
+      {{ .Version }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
+
+changelog:
+  use: github-native
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+#signs:
+#  - id: cosign
+#    artifacts: all
+#    cmd: cosign
+#    stdin: "{{ .Env.COSIGN_PASSWORD }}"
+#    args:
+#      - "sign-blob"
+#      - "--key=env://{{ .Env.COSIGN_PRIVATE_KEY }}"
+#      - "--oidc-issuer=https://token.actions.githubusercontent.com"
+#      - "--output-certificate=${certificate}"
+#      - "--output-signature=${signature}"
+#      - "${artifact}"
+#      - "--yes" # needed on cosign 2.0.0+
+#  - id: gpg2
+#    artifacts: all
+#    signature: "${artifact}.gpgsig"
+#    cmd: gpg2
+#    args:
+#      - "--batch"
+#      - "-u"
+#      - "{{ .Env.GPG_FINGERPRINT }}"
+#      - "--output=${signature}"
+#      - "--detach-sign=${artifact}"
+
+#docker_signs:
+#  - artifacts: all
+#    stdin: "{{ .Env.COSIGN_PASSWORD }}"
+#    args:
+#     - "sign"
+#     - "--key=env://{{ .Env.COSIGN_PRIVATE_KEY }}"
+#     - "--oidc-issuer=https://token.actions.githubusercontent.com"
+#     - "${artifact}@${digest}"
+#     - "--yes" # needed on cosign 2.0.0+
+
+release:
+  github: openbao
+  name: openbao
+  draft: ${{ .Env.GITHUB_RELEASE_DRAFT }}
+  replace_existing_draft: true
+  prerelease: ${{ .Env.GITHUB_PRERELEASE }}
+  make_latest: ${{ .Env.GITHUB_RELEASE_MAKE_LATEST }}
+  disable: false
