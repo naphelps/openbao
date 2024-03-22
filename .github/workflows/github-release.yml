@@ -60,13 +60,13 @@ jobs:
 
         # Supports Buildx
       - name: QEMU
-        uses: docker/setup-quemu@v3
+        uses: docker/setup-quemu-action@v3
 
       - name: Buildx
         uses: docker/setup-buildx-action@v2
 
       - name: Cosign
-        uses: signstore/cosign-installer@v3
+        uses: sigstore/cosign-installer@v3
 
 #      - name: GPG
 #        uses: crazy-max/ghaction-import-gpg@v6
