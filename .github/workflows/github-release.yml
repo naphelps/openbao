@@ -60,7 +60,7 @@ jobs:
 
         # Supports Buildx
       - name: QEMU
-        uses: docker/setup-quemu-action@v3
+        uses: docker/setup-qemu-action@v3
 
       - name: Buildx
         uses: docker/setup-buildx-action@v2
