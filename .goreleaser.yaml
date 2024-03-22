@@ -327,7 +327,7 @@ release:
   github:
     owner: openbao
     name: openbao
-  draft: ${{ .Env.GITHUB_RELEASE_DRAFT }}
+  draft: {{ .Env.GITHUB_RELEASE_DRAFT }}
   replace_existing_draft: true
   prerelease: ${{ .Env.GITHUB_PRERELEASE }}
   make_latest: ${{ .Env.GITHUB_RELEASE_MAKE_LATEST }}
