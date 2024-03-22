@@ -8,8 +8,6 @@
 
 project_name: bao
 
-version: 2
-
 before:
   hooks:
     # You may remove this if you don't use go modules.
