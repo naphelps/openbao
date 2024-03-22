@@ -6,22 +6,27 @@ name: github-release
 on:
   workflow_dispatch:
     inputs:
+      draft:
+        description: "Create a release draft"
+        required: false
+        default: false
+        type: boolean
       prerelease:
-        description: "Indicator of whether or not is a prerelease"
+        description: "Mark this release as a prerelease"
         required: false
         default: false
         type: boolean
       generate-release-notes:
-        description: "Whether to automatically generate the name and body for this release. If name is specified, the specified name will be used; otherwise, a name will be automatically generated. If body is specified, the body will be pre-pended to the automatically generated notes. See the GitHub docs for this feature for more information"
+        description: "Generate the release notes automatically"
         required: true
         default: true
         type: boolean
       body:
-        description: "Text communicating notable changes in this release. Prepends generated release notes."
+        description: "Release notes to prepend"
         required: false
         type: string
       make-latest:
-        description: "Specifies whether this release should be set as the latest release for the repository. Drafts and prereleases cannot be set as latest. Can be true, false, or legacy. Uses GitHub api defaults if not provided"
+        description: "Latest release (Prereleases default false)"
         required: true
         default: 'true'
         type: choice
@@ -55,6 +60,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body: ${{ inputs.body }}
+          draft: ${{ inputs.draft }}
           files: openbao/*
           generate_release_notes: ${{ inputs.generate-release-notes }}
           make_latest: ${{ inputs.make-latest }}
