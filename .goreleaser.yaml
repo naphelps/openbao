@@ -17,7 +17,7 @@ before:
     - make bootstrap
 
 builds:
-  - flags:
+  - ldflags:
       - -s -w
     env:
       - CGO_ENABLED=0
