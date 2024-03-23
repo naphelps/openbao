@@ -39,7 +39,7 @@ builds:
         goarch: arm
       - goos: windows
         goarch: arm
-    gobinary: go1.22.1
+    #gobinary: go1.22.1
     mod_timestamp: "{{ .CommitTimestamp }}"
 
 nfpms:
