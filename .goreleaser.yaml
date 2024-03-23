@@ -98,27 +98,27 @@ checksum:
   disable: true
   # split: false
 
-snapcrafts:
-  - name: openbao
-    title: OpenBao
-    publish: false
-    summary: OpenBao is an open governance secrets management platform.
-    description: |
-      OpenBao exists to provide a software solution to manage, store, and distribute 
-      sensitive data including secrets, certificates, and keys.
-    grade: devel
-    license: MPL-2.0
-    # Use the latest LTS version
-    base: core22
-    extra_files:
-      - source: ./LICENSE
-        destination: LICENSE.txt
-        mode: 0444
-    apps:
-      bao:
-        command: bao
-        aliases:
-          - bao
+#snapcrafts:
+#  - name: openbao
+#    title: OpenBao
+#    publish: false
+#    summary: OpenBao is an open governance secrets management platform.
+#    description: |
+#      OpenBao exists to provide a software solution to manage, store, and distribute
+#      sensitive data including secrets, certificates, and keys.
+#    grade: devel
+#    license: MPL-2.0
+#    # Use the latest LTS version
+#    base: core22
+#    extra_files:
+#      - source: ./LICENSE
+#        destination: LICENSE.txt
+#        mode: 0444
+#    apps:
+#      bao:
+#        command: bao
+#        aliases:
+#          - bao
 
 dockers:
   - id: linux-amd64
