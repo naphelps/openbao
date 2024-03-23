@@ -17,33 +17,79 @@ before:
     - make bootstrap
 
 builds:
-  - ldflags:
+  - id: linux-builds
+    ldflags:
       - -s -w
     env:
       - CGO_ENABLED=0
     goos:
-      - darwin
-      - freebsd
-      - illumos
       - linux
-      - openbsd
-      - solaris
-      - windows
     goarch:
       - amd64
       - arm
       - arm64
       - riscv64
     goarm:
+      - "6"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+  - id: windows-builds
+    ldflags:
+      - -s -w
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    goarm:
+      - "7"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+  - id: unix-builds
+    ldflags:
+      - -s -w
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - illumos
+      - solaris
+    goarch:
+      - amd64
+      - arm
+      - arm64
+    goarm:
       - "7"
     ignore:
+      - goos: illumos
+        goarch: arm
+      - goos: illumos
+        goarch: arm64
       - goos: solaris
         goarch: arm
-      - goos: windows
-        goarch: arm
-      - goos: freebsd
-        goarch: arm
+      - goos: solaris
+        goarch: arm64
     mod_timestamp: "{{ .CommitTimestamp }}"
+  - id: bsd-builds
+    ldflags:
+      - -s -w
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - freebsd
+      - openbsd
+    goarch:
+      - amd64
+      - arm
+      - arm64
+      - riscv64
+    goarm:
+      - "6"
+    ignore:
+      - goos: openbsd
+        goarch: riscv64
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
 
 nfpms:
   - vendor: OpenBao
