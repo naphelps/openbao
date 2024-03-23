@@ -331,7 +331,7 @@ changelog:
 
 release:
   github:
-    owner: openbao
+    owner: naphelps
     name: openbao
   draft: true #${{ .Env.GITHUB_RELEASE_DRAFT }}
   replace_existing_draft: true
