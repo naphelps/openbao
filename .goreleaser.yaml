@@ -194,45 +194,45 @@ dockers:
 #      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
 #    image_templates:
 #      - "ghcr.io/openbao/openbao:{{ .Version }}-riscv64"
-  - id: ubi9-amd64
-    use: buildx
-    goarch: amd64
-    skip_push: true
-    build_flag_templates:
-      - "--pull"
-      - "--build-context=ubi9-minimal=registry.access.redhat.com/ubi9-minimal:latest"
-      - "--platform=linux/amd64"
-      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
-      - "--label=org.opencontainers.image.vendor=OpenBao"
-      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
-      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
-      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
-      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
-      - "--label=org.opencontainers.image.licenses=MPL-2.0"
-      - "--label=org.opencontainers.image.version={{ .Version }}"
-      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
-      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
-    image_templates:
-      - "ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9"
-  - id: ubi9-arm64
-    use: buildx
-    goarch: arm64
-    build_flag_templates:
-      - "--pull"
-      - "--build-context=ubi9-minimal=registry.access.redhat.com/ubi9-minimal:latest"
-      - "--platform=linux/arm64"
-      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
-      - "--label=org.opencontainers.image.vendor=OpenBao"
-      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
-      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
-      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
-      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
-      - "--label=org.opencontainers.image.licenses=MPL-2.0"
-      - "--label=org.opencontainers.image.version={{ .Version }}"
-      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
-      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
-    image_templates:
-      - "ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9"
+#  - id: ubi9-amd64
+#    use: buildx
+#    goarch: amd64
+#    skip_push: true
+#    build_flag_templates:
+#      - "--pull"
+#      - "--build-context=ubi9-minimal=registry.access.redhat.com/ubi9-minimal:latest"
+#      - "--platform=linux/amd64"
+#      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+#      - "--label=org.opencontainers.image.vendor=OpenBao"
+#      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+#      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+#      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+#      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+#      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+#      - "--label=org.opencontainers.image.version={{ .Version }}"
+#      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+#      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+#    image_templates:
+#      - "ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9"
+#  - id: ubi9-arm64
+#    use: buildx
+#    goarch: arm64
+#    build_flag_templates:
+#      - "--pull"
+#      - "--build-context=ubi9-minimal=registry.access.redhat.com/ubi9-minimal:latest"
+#      - "--platform=linux/arm64"
+#      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+#      - "--label=org.opencontainers.image.vendor=OpenBao"
+#      - "--label=org.opencontainers.image.description=OpenBao {{ .Version }}"
+#      - "--label=org.opencontainers.image.url=https://github.com/openbao/openbao"
+#      - "--label=org.opencontainers.image.documentation=https://github.com/openbao/openbao/blob/main/README.md"
+#      - "--label=org.opencontainers.image.source=https://github.com/openbao/openbao"
+#      - "--label=org.opencontainers.image.licenses=MPL-2.0"
+#      - "--label=org.opencontainers.image.version={{ .Version }}"
+#      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+#      - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+#    image_templates:
+#      - "ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9"
 
 docker_manifests:
   - name_template: ghcr.io/openbao/openbao:{{ .Version }}
@@ -272,9 +272,7 @@ archives:
   - format: tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
-      {{ .ProjectName }}_
-      {{ .Version }}_
-      {{- title .Os }}_
+      {{ .ProjectName }}_{{ .Version }}_{{- title .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
