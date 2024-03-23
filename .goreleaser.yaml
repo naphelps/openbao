@@ -161,6 +161,7 @@ dockers:
   - id: linux-arm64
     use: buildx
     goarch: arm64
+    skip_push: true
     build_flag_templates:
       - "--pull"
       - "--platform=linux/arm64"
@@ -236,6 +237,7 @@ dockers:
 
 docker_manifests:
   - name_template: ghcr.io/openbao/openbao:{{ .Version }}
+    skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
@@ -244,6 +246,7 @@ docker_manifests:
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
       - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
   - name_template: ghcr.io/openbao/openbao:{{ .Major }}.{{ .Minor }}
+    skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
@@ -252,6 +255,7 @@ docker_manifests:
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
 #      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
   - name_template: ghcr.io/openbao/openbao:{{ .Major }}
+    skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
@@ -260,6 +264,7 @@ docker_manifests:
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
 #      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
   - name_template: ghcr.io/openbao/openbao:latest
+    skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64-ubi9
