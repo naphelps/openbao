@@ -58,12 +58,15 @@ jobs:
           go-version: stable
           check-latest: true
 
+      - name: Go Check
+        run: go version
+
         # Supports Buildx
       - name: QEMU
         uses: docker/setup-qemu-action@v3
 
       - name: Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Cosign
         uses: sigstore/cosign-installer@v3
