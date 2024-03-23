@@ -23,17 +23,17 @@ builds:
       - CGO_ENABLED=0
     goos:
       - darwin
-      #- freebsd
-      #- illumos
+      - freebsd
+      - illumos
       - linux
-      #- openbsd
-      #- solaris
+      - openbsd
+      - solaris
       - windows
     goarch:
       - amd64
-      #- arm
+      - arm
       - arm64
-      #- riscv64
+      - riscv64
     goarm:
       - "7"
     ignore:
@@ -95,7 +95,7 @@ nfpms:
 #        key_file: "{{ .Env.GPG_KEY_PATH }}"
 
 checksum:
-  disable: true
+  disable: false
   # split: false
 
 #snapcrafts:
@@ -236,7 +236,7 @@ dockers:
 #      - "ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9"
 
 docker_manifests:
-  - name_template: ghcr.io/openbao/openbao:{{ .Version }}
+  - name_template: ghcr.io/naphelps/openbao:{{ .Version }}
     skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
@@ -245,7 +245,7 @@ docker_manifests:
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
       - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
-  - name_template: ghcr.io/openbao/openbao:{{ .Major }}.{{ .Minor }}
+  - name_template: ghcr.io/naphelps/openbao:{{ .Major }}.{{ .Minor }}
     skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
@@ -254,7 +254,7 @@ docker_manifests:
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
 #      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
-  - name_template: ghcr.io/openbao/openbao:{{ .Major }}
+  - name_template: ghcr.io/naphelps/openbao:{{ .Major }}
     skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
@@ -263,7 +263,7 @@ docker_manifests:
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64
       - ghcr.io/openbao/openbao:{{ .Version }}-arm64-ubi9
 #      - ghcr.io/openbao/openbao:{{ .Version }}-riscv64
-  - name_template: ghcr.io/openbao/openbao:latest
+  - name_template: ghcr.io/naphelps/openbao:latest
     skip_push: true
     image_templates:
       - ghcr.io/openbao/openbao:{{ .Version }}-amd64
@@ -288,7 +288,7 @@ archives:
         format: zip
 
 changelog:
-  use: github-native
+  use: github
   sort: asc
   filters:
     exclude:
