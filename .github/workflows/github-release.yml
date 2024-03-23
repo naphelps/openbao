@@ -84,7 +84,8 @@ jobs:
           #COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           #GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          GITHUB_RELEASE_DRAFT: ${{ inputs.draft }}
+          GITHUB_RELEASE_DRAFT: true
+          #${{ inputs.draft }}
           GITHUB_RELEASE_PRERELEASE: ${{ inputs.prerelease }}
           GITHUB_RELEASE_MAKE_LATEST: ${{ inputs.make-latest }}
           #NFPM_DEFAULT_DEB_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}

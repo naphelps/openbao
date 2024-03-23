@@ -14,7 +14,7 @@ before:
     - go mod tidy
     # you may remove this if you don't need go generate
     - go generate ./...
-    - make protobuf
+    - make bootstrap
 
 builds:
   - flags:
