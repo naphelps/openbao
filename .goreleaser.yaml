@@ -62,17 +62,17 @@ nfpms:
       - openssl
     bindir: /usr/bin
     section: default
-    contents:
-      - src: ./LICENSE
-        dst: /usr/share/doc/openbao/copyright
-        file_info:
-          mode: 0444
-      - src: ./.release/linux/package/etc
-        dst: /etc
-        type: config
-      - src: ./.release/linux/package/usr
-        dst: /usr
-        type: config
+#    contents:
+#      - src: ./LICENSE
+#        dst: /usr/share/doc/openbao/copyright
+#        file_info:
+#          mode: 0444
+#      - src: ./.release/linux/package/etc
+#        dst: /etc
+#        type: config
+#      - src: ./.release/linux/package/usr
+#        dst: /usr
+#        type: config
     scripts:
       preinstall: ".release/linux/preinst"
       postinstall: ".release/linux/postinst"
