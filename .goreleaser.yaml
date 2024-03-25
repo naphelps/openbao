@@ -283,6 +283,7 @@ dockers:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-riscv64"
     extra_files:
       - ./.release/docker/docker-entrypoint.sh
+    dockerfile: Dockerfile-riscv64
 #  - id: ubi9-amd64
 #    use: buildx
 #    goarch: amd64
