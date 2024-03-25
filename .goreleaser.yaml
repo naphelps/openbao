@@ -332,7 +332,7 @@ docker_manifests:
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
-      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
+#      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
       - ghcr.io/naphelps/openbao:{{ .Version }}-arm64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
       - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
@@ -341,7 +341,7 @@ docker_manifests:
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
-      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
+#      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
       - ghcr.io/naphelps/openbao:{{ .Version }}-arm64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
       - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
@@ -350,7 +350,7 @@ docker_manifests:
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
-      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
+#      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
       - ghcr.io/naphelps/openbao:{{ .Version }}-arm64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
       - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
@@ -359,7 +359,7 @@ docker_manifests:
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
-      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
+#      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
       - ghcr.io/naphelps/openbao:{{ .Version }}-arm64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
       - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
