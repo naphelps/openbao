@@ -17,8 +17,7 @@ before:
     - make bootstrap
 
 builds:
-  - id: linux-builds
-    ldflags:
+  - ldflags:
       - -s -w
     env:
       - CGO_ENABLED=0
@@ -32,8 +31,8 @@ builds:
     goarm:
       - "6"
     mod_timestamp: "{{ .CommitTimestamp }}"
-  - id: windows-builds
-    ldflags:
+    skip: false
+  - ldflags:
       - -s -w
     env:
       - CGO_ENABLED=0
@@ -45,8 +44,8 @@ builds:
     goarm:
       - "7"
     mod_timestamp: "{{ .CommitTimestamp }}"
-  - id: unix-builds
-    ldflags:
+    skip: true
+  - ldflags:
       - -s -w
     env:
       - CGO_ENABLED=0
@@ -70,8 +69,8 @@ builds:
       - goos: solaris
         goarch: arm64
     mod_timestamp: "{{ .CommitTimestamp }}"
-  - id: bsd-builds
-    ldflags:
+    skip: true
+  - ldflags:
       - -s -w
     env:
       - CGO_ENABLED=0
@@ -89,6 +88,7 @@ builds:
       - goos: openbsd
         goarch: riscv64
     mod_timestamp: "{{ .CommitTimestamp }}"
+    skip: true
 
 
 nfpms:
@@ -383,4 +383,5 @@ release:
   replace_existing_draft: true
   prerelease: ${{ .Env.GITHUB_PRERELEASE }}
   make_latest: ${{ .Env.GITHUB_RELEASE_MAKE_LATEST }}
+  replace_existing_artifacts: false
   disable: false
