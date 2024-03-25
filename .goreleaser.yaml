@@ -244,6 +244,7 @@ dockers:
     use: buildx
     goos: linux
     goarch: arm64
+    goarm: "8"
     skip_push: true
     build_flag_templates:
       - "--pull"
