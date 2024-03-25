@@ -1,3 +1,0 @@
-FROM alpine:20240315
-ENTRYPOINT [ "/bao" ]
-COPY bao /
