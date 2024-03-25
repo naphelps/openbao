@@ -129,6 +129,8 @@ nfpms:
       #- archlinux
     dependencies:
       - openssl
+    provides:
+      - bao
     bindir: /usr/bin
     section: default
     contents:
@@ -148,6 +150,7 @@ nfpms:
         dst: /usr/systemd/system/openbao.service
         file_info:
           mode: 0644
+    file_name_template: "{{ .ConventionalFileName }}"
     scripts:
       preinstall: ".release/linux/preinst"
       postinstall: ".release/linux/postinst"
