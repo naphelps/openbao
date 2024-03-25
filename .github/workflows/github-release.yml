@@ -102,6 +102,7 @@ jobs:
           args: release --clean --timeout=60m
         env:
           #COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          DOCKER_CLI_EXPERIMENTAL: "enabled"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           #GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GITHUB_RELEASE_DRAFT: true
