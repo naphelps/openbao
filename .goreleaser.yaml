@@ -264,6 +264,7 @@ dockers:
       - ./.release/docker/docker-entrypoint.sh
   - id: linux-riscv64
     use: buildx
+    goos: linux
     goarch: riscv64
     build_flag_templates:
       - "--pull"
