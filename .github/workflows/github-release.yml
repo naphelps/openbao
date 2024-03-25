@@ -101,7 +101,7 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release --clean --timeout=60m
+          args: release --clean --timeout=60m --verbose --debug
         env:
           #COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
