@@ -40,7 +40,7 @@ builds:
         goarch: arm
       - goos: illumos
         goarch: arm64
-      - goarch: linux
+      - goos: linux
         goarm: "7"
       - goos: openbsd
         goarch: riscv64
