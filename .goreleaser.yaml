@@ -32,63 +32,64 @@ builds:
       - "6"
     mod_timestamp: "{{ .CommitTimestamp }}"
     skip: false
-  - ldflags:
-      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }}
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - windows
-    goarch:
-      - amd64
-      - arm64
-    goarm:
-      - "7"
-    mod_timestamp: "{{ .CommitTimestamp }}"
-    skip: true
-  - ldflags:
-      - -s -w
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - darwin
-      - illumos
-      - solaris
-    goarch:
-      - amd64
-      - arm
-      - arm64
-    goarm:
-      - "7"
-    ignore:
-      - goos: illumos
-        goarch: arm
-      - goos: illumos
-        goarch: arm64
-      - goos: solaris
-        goarch: arm
-      - goos: solaris
-        goarch: arm64
-    mod_timestamp: "{{ .CommitTimestamp }}"
-    skip: true
-  - ldflags:
-      - -s -w
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - freebsd
-      - openbsd
-    goarch:
-      - amd64
-      - arm
-      - arm64
-      - riscv64
-    goarm:
-      - "6"
-    ignore:
-      - goos: openbsd
-        goarch: riscv64
-    mod_timestamp: "{{ .CommitTimestamp }}"
-    skip: true
+
+#  - ldflags:
+#      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }}
+#    env:
+#      - CGO_ENABLED=0
+#    goos:
+#      - windows
+#    goarch:
+#      - amd64
+#      - arm64
+#    goarm:
+#      - "7"
+#    mod_timestamp: "{{ .CommitTimestamp }}"
+#    skip: true
+#  - ldflags:
+#      - -s -w
+#    env:
+#      - CGO_ENABLED=0
+#    goos:
+#      - darwin
+#      - illumos
+#      - solaris
+#    goarch:
+#      - amd64
+#      - arm
+#      - arm64
+#    goarm:
+#      - "7"
+#    ignore:
+#      - goos: illumos
+#        goarch: arm
+#      - goos: illumos
+#        goarch: arm64
+#      - goos: solaris
+#        goarch: arm
+#      - goos: solaris
+#        goarch: arm64
+#    mod_timestamp: "{{ .CommitTimestamp }}"
+#    skip: true
+#  - ldflags:
+#      - -s -w
+#    env:
+#      - CGO_ENABLED=0
+#    goos:
+#      - freebsd
+#      - openbsd
+#    goarch:
+#      - amd64
+#      - arm
+#      - arm64
+#      - riscv64
+#    goarm:
+#      - "6"
+#    ignore:
+#      - goos: openbsd
+#        goarch: riscv64
+#    mod_timestamp: "{{ .CommitTimestamp }}"
+#    skip: true
 
 
 nfpms:
