@@ -318,7 +318,7 @@ dockers:
 
 docker_manifests:
   - name_template: ghcr.io/naphelps/openbao:{{ .Version }}
-    skip_push: true
+    skip_push: false
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
@@ -327,32 +327,32 @@ docker_manifests:
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
       - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
   - name_template: ghcr.io/naphelps/openbao:{{ .Major }}.{{ .Minor }}
-    skip_push: true
+    skip_push: false
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
-#      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
+      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
       - ghcr.io/naphelps/openbao:{{ .Version }}-arm64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
-#      - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
+      - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
   - name_template: ghcr.io/naphelps/openbao:{{ .Major }}
-    skip_push: true
+    skip_push: false
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
-#      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
+      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
       - ghcr.io/naphelps/openbao:{{ .Version }}-arm64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
-#      - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
+      - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
   - name_template: ghcr.io/naphelps/openbao:latest
-    skip_push: true
+    skip_push: false
     image_templates:
       - ghcr.io/naphelps/openbao:{{ .Version }}-amd64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-amd64-ubi9
-#      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
+      - ghcr.io/naphelps/openbao:{{ .Version }}-arm
       - ghcr.io/naphelps/openbao:{{ .Version }}-arm64
 #      - ghcr.io/naphelps/openbao:{{ .Version }}-arm64-ubi9
-#      - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
+      - ghcr.io/naphelps/openbao:{{ .Version }}-riscv64
 
 archives:
   - format: tar.gz
