@@ -33,19 +33,19 @@ builds:
       - "7"
     ignore:
       - goos: darwin
-        goarm: 6
+        goarm: "6"
       - goos: freebsd
-        goarm: 7
+        goarm: "7"
       - goos: illumos
         goarch: arm
       - goos: illumos
         goarch: arm64
       - goarch: linux
-        goarm: 7
+        goarm: "7"
       - goos: openbsd
         goarch: riscv64
       - goos: openbsd
-        goarm: 7
+        goarm: "7"
       - goos: solaris
         goarch: arm
       - goos: solaris
@@ -150,7 +150,7 @@ nfpms:
         dst: /usr/systemd/system/openbao.service
         file_info:
           mode: 0644
-    file_name_template: "{{ .ConventionalFileName }}"
+    #file_name_template: "{{ .ConventionalFileName }}"
     scripts:
       preinstall: ".release/linux/preinst"
       postinstall: ".release/linux/postinst"
@@ -202,8 +202,9 @@ checksum:
 dockers:
   - id: linux-amd64
     use: buildx
+    goos: linux
     goarch: amd64
-    skip_push: true
+    skip_push: false
     build_flag_templates:
       - "--pull"
       - "--platform=linux/amd64"
@@ -239,6 +240,7 @@ dockers:
 #      - "ghcr.io/openbao/openbao:{{ .Version }}-arm"
   - id: linux-arm64
     use: buildx
+    goos: linux
     goarch: arm64
     skip_push: true
     build_flag_templates:
