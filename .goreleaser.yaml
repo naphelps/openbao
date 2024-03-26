@@ -225,7 +225,7 @@ dockers:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
       - ./CHANGELOG.md
-      #- ./dist/
+      - ./dist/
   - id: alpine-arm
     use: buildx
     goos: linux
@@ -251,7 +251,7 @@ dockers:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
       - ./CHANGELOG.md
-      #- ./dist/
+      - ./dist/
   - id: alpine-arm64
     use: buildx
     goos: linux
@@ -278,7 +278,7 @@ dockers:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
       - ./CHANGELOG.md
-      #- ./dist/
+      - ./dist/
   - id: alpine-riscv64
     use: buildx
     goos: linux
@@ -304,7 +304,7 @@ dockers:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
       - ./CHANGELOG.md
-      #- ./dist/
+      - ./dist
   - id: ubi-amd64
     use: buildx
     goos: linux
@@ -330,7 +330,7 @@ dockers:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
       - ./CHANGELOG.md
-      #- ./dist/
+      - ./dist
   - id: ubi-arm64
     use: buildx
     goos: linux
@@ -356,7 +356,7 @@ dockers:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
       - ./CHANGELOG.md
-      #- ./dist/
+      - ./dist
 
 docker_manifests:
   - name_template: ghcr.io/naphelps/openbao:{{ .Version }}
