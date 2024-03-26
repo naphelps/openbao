@@ -224,6 +224,7 @@ dockers:
     extra_files:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
+      - ./CHANGELOG.md
       - ./dist/
   - id: alpine-arm
     use: buildx
@@ -249,6 +250,7 @@ dockers:
     extra_files:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
+      - ./CHANGELOG.md
       - ./dist/
   - id: alpine-arm64
     use: buildx
@@ -275,6 +277,7 @@ dockers:
     extra_files:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
+      - ./CHANGELOG.md
       - ./dist/
   - id: alpine-riscv64
     use: buildx
@@ -300,6 +303,7 @@ dockers:
     extra_files:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
+      - ./CHANGELOG.md
       - ./dist/
   - id: ubi-amd64
     use: buildx
@@ -325,6 +329,7 @@ dockers:
     extra_files:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
+      - ./CHANGELOG.md
       - ./dist/
   - id: ubi-arm64
     use: buildx
@@ -348,8 +353,9 @@ dockers:
     image_templates:
       - "ghcr.io/openbao/openbao:{{ .Version }}-ubi-arm64"
     extra_files:
-      - LICENSE
+      - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
+      - ./CHANGELOG.md
       - ./dist/
 
 docker_manifests:
