@@ -36,7 +36,7 @@ RUN addgroup ${NAME} && adduser -S -G ${NAME} ${NAME}
 RUN apk add --no-cache libcap su-exec dumb-init tzdata
 
 #COPY dist/$TARGETOS/$TARGETARCH/$BIN_NAME /bin/
-COPY ./dist/$BIN_NAME /bin/
+COPY bao /usr/bin/bao
 
 # /vault/logs is made available to use as a location to store audit logs, if
 # desired; /vault/file is made available to use as a location with the file
@@ -108,7 +108,7 @@ RUN addgroup ${NAME} && adduser -S -G ${NAME} ${NAME}
 RUN apk add --no-cache libcap su-exec dumb-init tzdata
 
 #COPY dist/$TARGETOS/$TARGETARCH/$BIN_NAME /bin/
-COPY ./dist/$BIN_NAME /bin/
+COPY bao /usr/bin/bao
 
 # /vault/logs is made available to use as a location to store audit logs, if
 # desired; /vault/file is made available to use as a location with the file
@@ -188,7 +188,7 @@ RUN groupadd --gid 1000 openbao && \
 # Copy in the new OpenBao from CRT pipeline, rather than fetching it from our
 # public releases.
 #COPY dist/$TARGETOS/$TARGETARCH/$BIN_NAME /bin/
-COPY ./dist/$BIN_NAME /bin/
+COPY bao /usr/bin/bao
 
 # /vault/logs is made available to use as a location to store audit logs, if
 # desired; /vault/file is made available to use as a location with the file
