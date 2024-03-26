@@ -222,6 +222,7 @@ dockers:
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-amd64"
     extra_files:
+      - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
   - id: alpine-arm
     use: buildx
@@ -244,6 +245,9 @@ dockers:
       - "--target=default"
     image_templates:
       - "ghcr.io/openbao/openbao:{{ .Version }}-alpine-arm"
+    extra_files:
+      - ./LICENSE
+      - ./.release/docker/docker-entrypoint.sh
   - id: alpine-arm64
     use: buildx
     goos: linux
@@ -267,6 +271,7 @@ dockers:
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-arm64"
     extra_files:
+      - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
   - id: alpine-riscv64
     use: buildx
@@ -290,6 +295,7 @@ dockers:
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-riscv64"
     extra_files:
+      - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
   - id: ubi-amd64
     use: buildx
@@ -313,6 +319,7 @@ dockers:
     image_templates:
       - "ghcr.io/openbao/openbao:{{ .Version }}-ubi-amd64"
     extra_files:
+      - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
   - id: ubi-arm64
     use: buildx
@@ -336,6 +343,7 @@ dockers:
     image_templates:
       - "ghcr.io/openbao/openbao:{{ .Version }}-ubi-arm64"
     extra_files:
+      - LICENSE
       - ./.release/docker/docker-entrypoint.sh
 
 docker_manifests:

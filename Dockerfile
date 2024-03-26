@@ -24,7 +24,7 @@ LABEL name="OpenBao" \
       summary="OpenBao is a tool for securely accessing secrets." \
       description="OpenBao is a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, certificates, and more. OpenBao provides a unified interface to any secret, while providing tight access control and recording a detailed audit log."
 
-COPY LICENSE /licenses/mozilla.txt
+COPY ./LICENSE /licenses/mozilla.txt
 
 # Set ARGs as ENV so that they can be used in ENTRYPOINT/CMD
 ENV NAME=$NAME
@@ -36,7 +36,7 @@ RUN addgroup ${NAME} && adduser -S -G ${NAME} ${NAME}
 RUN apk add --no-cache libcap su-exec dumb-init tzdata
 
 #COPY dist/$TARGETOS/$TARGETARCH/$BIN_NAME /bin/
-COPY dist/$BIN_NAME /bin/
+COPY ./dist/$BIN_NAME /bin/
 
 # /vault/logs is made available to use as a location to store audit logs, if
 # desired; /vault/file is made available to use as a location with the file
@@ -65,7 +65,7 @@ EXPOSE 8200
 #
 # For production derivatives of this container, you shoud add the IPC_LOCK
 # capability so that OpenBao can mlock memory.
-COPY .release/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY ./.release/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 
@@ -96,7 +96,7 @@ LABEL name="OpenBao" \
       summary="OpenBao is a tool for securely accessing secrets." \
       description="OpenBao is a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, certificates, and more. OpenBao provides a unified interface to any secret, while providing tight access control and recording a detailed audit log."
 
-COPY LICENSE /licenses/mozilla.txt
+COPY ./LICENSE /licenses/mozilla.txt
 
 # Set ARGs as ENV so that they can be used in ENTRYPOINT/CMD
 ENV NAME=$NAME
@@ -108,7 +108,7 @@ RUN addgroup ${NAME} && adduser -S -G ${NAME} ${NAME}
 RUN apk add --no-cache libcap su-exec dumb-init tzdata
 
 #COPY dist/$TARGETOS/$TARGETARCH/$BIN_NAME /bin/
-COPY dist/$BIN_NAME /bin/
+COPY ./dist/$BIN_NAME /bin/
 
 # /vault/logs is made available to use as a location to store audit logs, if
 # desired; /vault/file is made available to use as a location with the file
@@ -137,7 +137,7 @@ EXPOSE 8200
 #
 # For production derivatives of this container, you shoud add the IPC_LOCK
 # capability so that OpenBao can mlock memory.
-COPY .release/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY ./.release/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 
@@ -168,7 +168,7 @@ LABEL name="OpenBao" \
       summary="OpenBao is a tool for securely accessing secrets." \
       description="OpenBao is a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, certificates, and more. OpenBao provides a unified interface to any secret, while providing tight access control and recording a detailed audit log."
 
-COPY LICENSE /licenses/mozilla.txt
+COPY ./LICENSE /licenses/mozilla.txt
 
 # Set ARGs as ENV so that they can be used in ENTRYPOINT/CMD
 ENV NAME=$NAME
@@ -188,7 +188,7 @@ RUN groupadd --gid 1000 openbao && \
 # Copy in the new OpenBao from CRT pipeline, rather than fetching it from our
 # public releases.
 #COPY dist/$TARGETOS/$TARGETARCH/$BIN_NAME /bin/
-COPY dist/$BIN_NAME /bin/
+COPY ./dist/$BIN_NAME /bin/
 
 # /vault/logs is made available to use as a location to store audit logs, if
 # desired; /vault/file is made available to use as a location with the file
@@ -221,7 +221,7 @@ EXPOSE 8200
 #
 # For production derivatives of this container, you shoud add the IPC_LOCK
 # capability so that OpenBao can mlock memory.
-COPY .release/docker/ubi-docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY ./.release/docker/ubi-docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Use the OpenBao user as the default user for starting this container.
