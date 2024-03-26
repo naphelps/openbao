@@ -230,6 +230,7 @@ dockers:
     goos: linux
     goarch: arm
     goarm: "6"
+    skip_push: false
     build_flag_templates:
       - "--pull"
       - "--platform=linux/arm"
@@ -245,7 +246,7 @@ dockers:
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
       - "--target=default"
     image_templates:
-      - "ghcr.io/openbao/openbao:{{ .Version }}-alpine-arm"
+      - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-arm"
     extra_files:
       - ./LICENSE
       - ./.release/docker/docker-entrypoint.sh
@@ -321,7 +322,7 @@ dockers:
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
       - "--target=ubi"
     image_templates:
-      - "ghcr.io/openbao/openbao:{{ .Version }}-ubi-amd64"
+      - "ghcr.io/naphelps/openbao:{{ .Version }}-ubi-amd64"
     extra_files:
       - ./LICENSE
       - ./.release/docker/ubi-docker-entrypoint.sh
@@ -346,7 +347,7 @@ dockers:
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
       - "--target=ubi"
     image_templates:
-      - "ghcr.io/openbao/openbao:{{ .Version }}-ubi-arm64"
+      - "ghcr.io/naphelps/openbao:{{ .Version }}-ubi-arm64"
     extra_files:
       - ./LICENSE
       - ./.release/docker/ubi-docker-entrypoint.sh
