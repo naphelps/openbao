@@ -324,7 +324,7 @@ dockers:
       - "ghcr.io/openbao/openbao:{{ .Version }}-ubi-amd64"
     extra_files:
       - ./LICENSE
-      - ./.release/docker/docker-entrypoint.sh
+      - ./.release/docker/ubi-docker-entrypoint.sh
       - ./CHANGELOG.md
   - id: ubi-arm64
     use: buildx
@@ -349,7 +349,7 @@ dockers:
       - "ghcr.io/openbao/openbao:{{ .Version }}-ubi-arm64"
     extra_files:
       - ./LICENSE
-      - ./.release/docker/docker-entrypoint.sh
+      - ./.release/docker/ubi-docker-entrypoint.sh
       - ./CHANGELOG.md
 
 docker_manifests:
