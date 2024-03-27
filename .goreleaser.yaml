@@ -8,9 +8,6 @@
 
 project_name: bao
 
-env:
-  - SKIP_LINUX_BUILDS: "true"
-
 before:
   hooks:
     # You may remove this if you don't use go modules.
