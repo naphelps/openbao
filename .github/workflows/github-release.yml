@@ -54,7 +54,12 @@ jobs:
         with:
           root-reserve-mb: 512
           swap-size-mb: 1024
+          temp-reserve-mb: 100
+          remove-android: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'
           remove-dotnet: 'true'
+          remove-haskell: 'true'
 
       - name: Checkout
         uses: actions/checkout@v4
