@@ -124,3 +124,4 @@ jobs:
           GITHUB_RELEASE_MAKE_LATEST: ${{ inputs.make-latest }}
           #NFPM_DEFAULT_DEB_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
           #NFPM_DEFAULT_RPM_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
+          SKIP_BUILD_LINUX: 'true'

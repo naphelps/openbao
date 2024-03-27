@@ -17,14 +17,50 @@ before:
     - make bootstrap
 
 builds:
-  - ldflags:
+  - id: builds-linux
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }}
+      env:
+        - CGO_ENABLED=0
+      goos:
+        - linux
+      goarch:
+        - amd64
+        - arm
+        - arm64
+        - riscv64
+      goarm:
+        - "6"
+        - "7"
+      ignore:
+        - goos: darwin
+          goarm: "6"
+        - goos: freebsd
+          goarm: "7"
+        - goos: illumos
+          goarch: arm
+        - goos: illumos
+          goarch: arm64
+        - goos: linux
+          goarm: "7"
+        - goos: openbsd
+          goarch: riscv64
+        - goos: openbsd
+          goarm: "7"
+        - goos: solaris
+          goarch: arm
+        - goos: solaris
+          goarch: arm64
+      mod_timestamp: "{{ .CommitTimestamp }}"
+      skip: {{ .Env.SKIP_BUILD_LINUX }}
+  - id: builds-other
+    ldflags:
       - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }}
     env:
       - CGO_ENABLED=0
     goos:
       - darwin
       - illumos
-      #- linux
       - windows
     goarch:
       - amd64
@@ -208,6 +244,8 @@ dockers:
     goos: linux
     goarch: amd64
     skip_push: false
+    ids:
+      - builds-linux
     build_flag_templates:
       - "--pull"
       - "--platform=linux/amd64"
@@ -234,6 +272,8 @@ dockers:
     goarch: arm
     goarm: "6"
     skip_push: false
+    ids:
+      - builds-linux
     build_flag_templates:
       - "--pull"
       - "--platform=linux/arm"
@@ -260,6 +300,8 @@ dockers:
     goarch: arm64
     goarm: "8"
     skip_push: false
+    ids:
+      - builds-linux
     build_flag_templates:
       - "--pull"
       - "--platform=linux/arm64"
@@ -285,6 +327,8 @@ dockers:
     goos: linux
     goarch: riscv64
     skip_push: false
+    ids:
+      - builds-linux
     build_flag_templates:
       - "--pull"
       - "--platform=linux/riscv64"
@@ -310,6 +354,8 @@ dockers:
     goos: linux
     goarch: amd64
     skip_push: false
+    ids:
+      - builds-linux
     build_flag_templates:
       - "--pull"
       - "--platform=linux/amd64"
@@ -335,6 +381,9 @@ dockers:
     goos: linux
     goarch: arm64
     goarm: "8"
+    skip_push: false
+    ids:
+      - builds-linux
     build_flag_templates:
       - "--pull"
       - "--platform=linux/arm64"
