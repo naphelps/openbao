@@ -24,7 +24,7 @@ builds:
     goos:
       - darwin
       - illumos
-      - linux
+      #- linux
       - windows
     goarch:
       - amd64
@@ -176,7 +176,7 @@ nfpms:
 #        key_file: "{{ .Env.GPG_KEY_PATH }}"
 
 checksum:
-  name_template: "checksums.txt"
+  name_template: "checksums-{{ .Os }}.txt"
   disable: false
   # split: false
 
@@ -461,7 +461,7 @@ release:
     owner: naphelps
     name: openbao
   draft: true #${{ .Env.GITHUB_RELEASE_DRAFT }}
-  replace_existing_draft: true
+  replace_existing_draft: false
   prerelease: ${{ .Env.GITHUB_PRERELEASE }}
   make_latest: ${{ .Env.GITHUB_RELEASE_MAKE_LATEST }}
   disable: false

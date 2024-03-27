@@ -49,18 +49,17 @@ jobs:
     env:
       DOCKER_CLI_EXPERIMENTAL: "enabled"
     steps:
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@v10
-        with:
-          build-mount-path: "/home/runner"
-          root-reserve-mb: 512
-          swap-size-mb: 1024
-          temp-reserve-mb: 100
-          remove-android: 'true'
-          remove-codeql: 'true'
-          remove-docker-images: 'true'
-          remove-dotnet: 'true'
-          remove-haskell: 'true'
+      #- name: Maximize build space
+      #  uses: easimon/maximize-build-space@v10
+      #  with:
+      #    root-reserve-mb: 512
+      #    swap-size-mb: 1024
+      #    temp-reserve-mb: 100
+      #    remove-android: 'true'
+      #    remove-codeql: 'true'
+      #    remove-docker-images: 'true'
+      #    remove-dotnet: 'true'
+      #    remove-haskell: 'true'
 
       - name: Checkout
         uses: actions/checkout@v4
