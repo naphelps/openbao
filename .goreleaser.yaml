@@ -8,6 +8,9 @@
 
 project_name: bao
 
+env:
+  - SKIP_LINUX_BUILDS: "true"
+
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -52,7 +55,7 @@ builds:
       - goos: solaris
         goarch: arm64
     mod_timestamp: "{{ .CommitTimestamp }}"
-    skip: {{ .Env.SKIP_BUILD_LINUX }}
+    skip: false
   - id: builds-other
     ldflags:
       - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }}
@@ -60,7 +63,7 @@ builds:
       - CGO_ENABLED=0
     goos:
       - darwin
-      - illumos
+      #- illumos
       - windows
     goarch:
       - amd64
@@ -73,6 +76,10 @@ builds:
     ignore:
       - goos: darwin
         goarm: "6"
+      - goos: darwin
+        goarch: arm
+      - goos: darwin
+        goarch: riscv64
       - goos: freebsd
         goarm: "7"
       - goos: illumos
@@ -89,6 +96,8 @@ builds:
         goarch: arm
       - goos: solaris
         goarch: arm64
+      - goos: windows
+        goarch: riscv64
     mod_timestamp: "{{ .CommitTimestamp }}"
     skip: false
 
