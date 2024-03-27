@@ -218,7 +218,7 @@ nfpms:
 #        key_file: "{{ .Env.GPG_KEY_PATH }}"
 
 checksum:
-  name_template: "checksums-{{ .Os }}.txt"
+  name_template: "checksums.txt"
   disable: false
   # split: false
 
