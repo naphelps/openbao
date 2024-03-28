@@ -95,8 +95,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ./dist/*.deb
-            ./dist/*.rpm
+            ./dist/**/*.deb
+            ./dist/**/*.rpm
+            ./dist/*.tar.gz
+            ./dist/*.zip
           key: ${{ github.ref }}
           #./dist/*.apk
 
@@ -113,7 +115,7 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release --clean --timeout=60m --verbose --debug
+          args: release --clean --timeout=60m #--verbose --debug
         env:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
