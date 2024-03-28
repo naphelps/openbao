@@ -210,12 +210,12 @@ nfpms:
       archlinux:
         dependencies:
           - openssl
-    deb:
-      signature:
-        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
-    rpm:
-      signature:
-        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
+#    deb:
+#      signature:
+#        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
+#    rpm:
+#      signature:
+#        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
 
 checksum:
   name_template: "checksums.txt"
