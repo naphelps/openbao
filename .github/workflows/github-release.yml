@@ -61,12 +61,12 @@ jobs:
       #    remove-dotnet: 'true'
       #    remove-haskell: 'true'
 
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Required by GoRelease
 
-      - name: golang-setup
+      - name: Golang Setup
         uses: actions/setup-go@v5
         with:
           go-version: stable
@@ -76,22 +76,24 @@ jobs:
         run: go version
 
         # Supports Buildx
-      - name: qemu-setup
+      - name: Qemu Setup
         uses: docker/setup-qemu-action@v3
 
-      - name: buildx-setup
+      - name: Buildx Setup
         uses: docker/setup-buildx-action@v3
 
-      - name: cosign-install
+      - name: Cosign Install
         uses: sigstore/cosign-installer@v3
 
-      - name: gpg-import
+      - name: GPG Import
+        id: gpg-import
         uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSWORD }}
 
-      - name: cache-setup
+
+      - name: Cache Setup
         uses: actions/cache@v4
         with:
           path: |
@@ -102,7 +104,7 @@ jobs:
           key: ${{ github.ref }}
           #./dist/*.apk
 
-      - name: docker-login-ghcr.io
+      - name: "Docker Login: ghcr.io"
         if: startsWith(github.ref, 'refs/tags/')
         uses: docker/login-action@v3
         with:
@@ -110,12 +112,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: goreleaser-release
+      - name: "GoReleaser: Release"
         uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser
           version: latest
-          args: release --clean --timeout=60m #--verbose --debug
+          args: release --clean --timeout=60m --verbose --debug
         env:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
