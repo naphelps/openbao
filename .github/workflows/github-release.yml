@@ -115,13 +115,12 @@ jobs:
           version: latest
           args: release --clean --timeout=60m --verbose --debug
         env:
-          #COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          #GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          GITHUB_RELEASE_DRAFT: true
-          #${{ inputs.draft }}
+          GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GITHUB_RELEASE_PRERELEASE: ${{ inputs.prerelease }}
           GITHUB_RELEASE_MAKE_LATEST: ${{ inputs.make-latest }}
-          #NFPM_DEFAULT_DEB_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
-          #NFPM_DEFAULT_RPM_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
-          SKIP_BUILD_LINUX: true
+          NFPM_DEFAULT_DEB_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
+          NFPM_DEFAULT_RPM_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
