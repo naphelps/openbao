@@ -212,10 +212,10 @@ nfpms:
           - openssl
     deb:
       signature:
-        key_file: "{{ .Env.GPG_FINGERPRINT }}"
+        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
     rpm:
       signature:
-        key_file: "{{ .Env.GPG_FINGERPRINT }}"
+        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
 
 checksum:
   name_template: "checksums.txt"
