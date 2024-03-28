@@ -490,14 +490,14 @@ signs:
       - "--output-signature=${signature}"
       - "${artifact}"
       - "--yes" # needed on cosign 2.0.0+
-  - id: gpg2
+  - id: gpg
     artifacts: all
     signature: "${artifact}.gpgsig"
-    cmd: gpg2
+    cmd: gpg
     stdin: "{{ .Env.GPG_PASSWORD }}"
     args:
       - "--batch"
-      - "-u {{ .Env.GPG_FINGERPRINT }}"
+      - "--default-key {{ .Env.GPG_FINGERPRINT }}"
       - "--output=${signature}"
       - "--detach-sign=${artifact}"
 
