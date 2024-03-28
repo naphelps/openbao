@@ -481,10 +481,10 @@ signs:
   - id: cosign
     artifacts: all
     cmd: cosign
-    stdin: "{{ .Env.COSIGN_PASSWORD }}"
+    #stdin: "{{ .Env.COSIGN_PASSWORD }}"
     args:
       - "sign-blob"
-      - "--key {{ .Env.COSIGN_PRIVATE_KEY }}"
+      #- "--key {{ .Env.COSIGN_PRIVATE_KEY }}"
       - "--oidc-issuer=https://token.actions.githubusercontent.com"
       - "--output-certificate=${certificate}"
       - "--output-signature=${signature}"
@@ -503,10 +503,10 @@ signs:
 
 docker_signs:
   - artifacts: all
-    stdin: "{{ .Env.COSIGN_PASSWORD }}"
+    #stdin: "{{ .Env.COSIGN_PASSWORD }}"
     args:
      - "sign"
-     - "--key {{ .Env.COSIGN_PRIVATE_KEY }}"
+     #- "--key {{ .Env.COSIGN_PRIVATE_KEY }}"
      - "--oidc-issuer=https://token.actions.githubusercontent.com"
      - "${artifact}@${digest}"
      - "--yes" # needed on cosign 2.0.0+
