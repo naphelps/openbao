@@ -100,65 +100,6 @@ builds:
 
 report_sizes: true
 
-#  - ldflags:
-#      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }}
-#    env:
-#      - CGO_ENABLED=0
-#    goos:
-#      - windows
-#    goarch:
-#      - amd64
-#      - arm64
-#    goarm:
-#      - "7"
-#    mod_timestamp: "{{ .CommitTimestamp }}"
-#    skip: true
-#  - ldflags:
-#      - -s -w
-#    env:
-#      - CGO_ENABLED=0
-#    goos:
-#      - darwin
-#      - illumos
-#      - solaris
-#    goarch:
-#      - amd64
-#      - arm
-#      - arm64
-#    goarm:
-#      - "7"
-#    ignore:
-#      - goos: illumos
-#        goarch: arm
-#      - goos: illumos
-#        goarch: arm64
-#      - goos: solaris
-#        goarch: arm
-#      - goos: solaris
-#        goarch: arm64
-#    mod_timestamp: "{{ .CommitTimestamp }}"
-#    skip: true
-#  - ldflags:
-#      - -s -w
-#    env:
-#      - CGO_ENABLED=0
-#    goos:
-#      - freebsd
-#      - openbsd
-#    goarch:
-#      - amd64
-#      - arm
-#      - arm64
-#      - riscv64
-#    goarm:
-#      - "6"
-#    ignore:
-#      - goos: openbsd
-#        goarch: riscv64
-#    mod_timestamp: "{{ .CommitTimestamp }}"
-#    skip: true
-
-
 nfpms:
   - vendor: OpenBao
     homepage: https://github.com/openbao/openbao
@@ -195,7 +136,6 @@ nfpms:
         dst: /usr/systemd/system/openbao.service
         file_info:
           mode: 0644
-    #file_name_template: "{{ .ConventionalFileName }}"
     scripts:
       preinstall: ".release/linux/preinst"
       postinstall: ".release/linux/postinst"
@@ -210,12 +150,12 @@ nfpms:
       archlinux:
         dependencies:
           - openssl
-#    deb:
-#      signature:
-#        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
-#    rpm:
-#      signature:
-#        key_file: "{{ .Env.GPG_PRIVATE_KEY }}"
+    deb:
+      signature:
+        key_file: "{{ .Env.GPG_KEY_FILE }}"
+    rpm:
+      signature:
+        key_file: "{{ .Env.GPG_KEY_FILE }}"
 
 checksum:
   name_template: "checksums.txt"
@@ -265,6 +205,8 @@ dockers:
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+      - "--build-arg=REVISION={{ .FullCommit }}"
+      - "--build-arg=VERSION={{ .Version }}"
       - "--target=default"
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-amd64"
@@ -293,6 +235,8 @@ dockers:
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+      - "--build-arg=REVISION={{ .FullCommit }}"
+      - "--build-arg=VERSION={{ .Version }}"
       - "--target=default"
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-arm"
@@ -321,6 +265,8 @@ dockers:
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+      - "--build-arg=REVISION={{ .FullCommit }}"
+      - "--build-arg=VERSION={{ .Version }}"
       - "--target=default"
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-arm64"
@@ -348,6 +294,8 @@ dockers:
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+      - "--build-arg=REVISION={{ .FullCommit }}"
+      - "--build-arg=VERSION={{ .Version }}"
       - "--target=default-riscv64"
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-alpine-riscv64"
@@ -375,6 +323,8 @@ dockers:
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+      - "--build-arg=REVISION={{ .FullCommit }}"
+      - "--build-arg=VERSION={{ .Version }}"
       - "--target=ubi"
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-ubi-amd64"
@@ -403,6 +353,8 @@ dockers:
       - "--label=org.opencontainers.image.version={{ .Version }}"
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.created={{ time \"2006-01-02T15:04:05Z07:00\" }}"
+      - "--build-arg=REVISION={{ .FullCommit }}"
+      - "--build-arg=VERSION={{ .Version }}"
       - "--target=ubi"
     image_templates:
       - "ghcr.io/naphelps/openbao:{{ .Version }}-ubi-arm64"

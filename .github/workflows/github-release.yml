@@ -113,6 +113,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+        # Needed for nPFM
+      - name: Create GPG Signing Key File
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          GPG_KEY_FILE=/tmp/signing-key.gpg
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode > "${GPG_KEY_FILE}"
+          echo "GPG_KEY_FILE=${GPG_KEY_FILE}" >> "${GITHUB_ENV}"
+        env:
+          GPG_TTY: /dev/ttys000  # Set the GPG_TTY to avoid issues with pinentry
+
       - name: "GoReleaser: Release"
         uses: goreleaser/goreleaser-action@v5
         with:
@@ -129,3 +139,10 @@ jobs:
           GITHUB_RELEASE_PRERELEASE: ${{ inputs.prerelease }}
           GITHUB_RELEASE_MAKE_LATEST: ${{ inputs.make-latest }}
           NFPM_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
+
+      - name: Remove GPG Signing Key File
+        if: always()
+        run: |
+          if [ -n "${GPG_KEY_FILE}" ]; then
+            rm -rf "${GPG_KEY_FILE}"
+          fi
