@@ -138,7 +138,7 @@ jobs:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GITHUB_RELEASE_PRERELEASE: ${{ inputs.prerelease }}
           GITHUB_RELEASE_MAKE_LATEST: ${{ inputs.make-latest }}
-          NFPM_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
+          NFPM_DEFAULT_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
 
       - name: Remove GPG Signing Key File
         if: always()
