@@ -622,7 +622,7 @@ docker_signs:
 
 release:
   github:
-    owner: ${{ .Env.GITHUB_REPOSITORY_OWNER }}
+    owner: naphelps
     name: openbao
   draft: true #${{ .Env.GITHUB_RELEASE_DRAFT }}
   replace_existing_draft: false
