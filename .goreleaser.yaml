@@ -21,7 +21,6 @@ gomod:
   env:
     - GOPROXY=https://proxy.golang.org,direct
     - GOSUMDB=sum.golang.org
-  gobinary: 1.22.3
 
 builds:
   - id: builds-linux
@@ -585,6 +584,9 @@ archives:
       mode: 0755
       # format is `time.RFC3339Nano`
       mtime: 2008-01-02T15:04:05Z
+
+source:
+  enabled: true
 
 sboms:
   - artifacts: any
