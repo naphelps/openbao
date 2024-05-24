@@ -53,14 +53,16 @@ builds:
       - netbsd
       - openbsd
       - solaris
-      #- wasip1
+      - wasip1
       - windows
     goarch:
       - amd64
       - arm
       - arm64
+      - ppc64le
       - riscv64
-      #- wasm
+      - s390x
+      - wasm
     goarm:
       - "6"
       - "7"
@@ -70,7 +72,11 @@ builds:
       - goos: darwin
         goarch: arm
       - goos: darwin
+        goarch: ppc64le
+      - goos: darwin
         goarch: riscv64
+      - goos: darwin
+        goarch: s390x
       - goos: darwin
         goarch: wasm
       - goos: dragonfly
@@ -84,21 +90,37 @@ builds:
       - goos: freebsd
         goarm: "7"
       - goos: freebsd
+        goarch: ppc64le
+      - goos: freebsd
+        goarch: s390x
+      - goos: freebsd
         goarch: wasm
       - goos: illumos
         goarch: arm
       - goos: illumos
         goarch: arm64
       - goos: illumos
+        goarch: ppc64le
+      - goos: illumos
+        goarch: s390x
+      - goos: illumos
         goarch: wasm
       - goos: netbsd
+        goarch: ppc64le
+      - goos: netbsd
         goarch: riscv64
+      - goos: netbsd
+        goarch: s390x
       - goos: netbsd
         goarch: wasm
       - goos: netbsd
         goarm: "7"
       - goos: openbsd
+        goarch: ppc64le
+      - goos: openbsd
         goarch: riscv64
+      - goos: openbsd
+        goarch: s390x
       - goos: openbsd
         goarch: wasm
       - goos: openbsd
@@ -108,12 +130,28 @@ builds:
       - goos: solaris
         goarch: arm64
       - goos: solaris
+        goarch: ppc64le
+      - goos: solaris
+        goarch: s390x
+      - goos: solaris
         goarch: wasm
+      - goos: wasip1
+        goarch: amd64
+      - goos: wasip1
+        goarch: arm
+      - goos: wasip1
+        goarch: arm64
+      - goos: wasip1
+        goarch: riscv64
       - goos: windows
         goarch: arm
         goarm: "7"
       - goos: windows
+        goarch: ppc64le
+      - goos: windows
         goarch: riscv64
+      - goos: windows
+        goarch: s390x
       - goos: windows
         goarch: wasm
     mod_timestamp: "{{ .CommitTimestamp }}"
@@ -123,8 +161,8 @@ report_sizes: true
 
 nfpms:
   - vendor: OpenBao
-    homepage: https://github.com/openbao/openbao
-    maintainer: OpenBao
+    homepage: https://openbao.org
+    maintainer: OpenBao <https://lists.lfedge.org/g/openbao>
     description: |
       OpenBao exists to provide a software solution to manage, store, and distribute
       sensitive data including secrets, certificates, and keys.
@@ -579,6 +617,7 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
+      -
     builds_info:
       group: root
       owner: root
@@ -586,11 +625,13 @@ archives:
       # format is `time.RFC3339Nano`
       mtime: 2008-01-02T15:04:05Z
 
-source:
-  enabled: true
+#source:
+#  enabled: true
 
 sboms:
   - artifacts: archive
+  - id: binary
+    artifacts: binary
   - id: package
     artifacts: package
 
