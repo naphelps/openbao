@@ -650,7 +650,7 @@ docker_manifests:
       - ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/openbao-ubi:{{ .Version }}-amd64
       - ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/openbao-ubi:{{ .Version }}-arm64
       - ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/openbao-ubi:{{ .Version }}-ppc64le
-      - ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/openbao-ubi:{{ .Version }}-390x
+      - ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/openbao-ubi:{{ .Version }}-s390x
   - name_template: ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/openbao-ubi:{{ .Major }}
     skip_push: false
     image_templates:
