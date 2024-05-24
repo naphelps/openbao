@@ -21,7 +21,7 @@ gomod:
   env:
     - GOPROXY=https://proxy.golang.org,direct
     - GOSUMDB=sum.golang.org
-  gobinary: go1.22.3
+  gobinary: 1.22.3
 
 builds:
   - id: builds-linux
