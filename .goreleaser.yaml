@@ -590,7 +590,9 @@ source:
   enabled: true
 
 sboms:
-  - artifacts: any
+  - artifacts: archive
+  - id: package
+    artifacts: package
 
 changelog:
   use: github
