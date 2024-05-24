@@ -35,7 +35,9 @@ builds:
       - amd64
       - arm
       - arm64
+      - ppc64le
       - riscv64
+      - s390x
     goarm:
       - "6"
     mod_timestamp: "{{ .CommitTimestamp }}"
@@ -53,16 +55,16 @@ builds:
       - netbsd
       - openbsd
       - solaris
-      - wasip1
+      #- wasip1
       - windows
     goarch:
       - amd64
       - arm
       - arm64
-      - ppc64le
+      #- ppc64le
       - riscv64
-      - s390x
-      - wasm
+      #- s390x
+      #- wasm
     goarm:
       - "6"
       - "7"
