@@ -16,11 +16,12 @@ before:
     - go generate ./...
     - make bootstrap
 
-gomod:
-  proxy: true
-  env:
-    - GOPROXY=https://proxy.golang.org,direct
-    - GOSUMDB=sum.golang.org
+# Cannot have replace directives in the go modules.
+#gomod:
+#  proxy: true
+#  env:
+#    - GOPROXY=https://proxy.golang.org,direct
+#    - GOSUMDB=sum.golang.org
 
 builds:
   - id: builds-linux
