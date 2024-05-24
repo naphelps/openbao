@@ -16,6 +16,13 @@ before:
     - go generate ./...
     - make bootstrap
 
+gomod:
+  proxy: true
+  env:
+    - GOPROXY=https://proxy.golang.org,direct
+    - GOSUMDB=sum.golang.org
+  gobinary: go1.22.3
+
 builds:
   - id: builds-linux
     ldflags:
@@ -580,7 +587,7 @@ archives:
       mtime: 2008-01-02T15:04:05Z
 
 sboms:
-  - artifacts: archive
+  - artifacts: any
 
 changelog:
   use: github
